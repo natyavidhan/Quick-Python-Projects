@@ -50,7 +50,7 @@ class App:
         length = int(self.length.get())
         try:
             password = "".join(random.sample(password, length))
-        except ValueError:
+        except:
             password = "Error"
         self.password.delete(0, tk.END)
         self.password.insert(0, password)
