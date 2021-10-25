@@ -6,7 +6,7 @@ import json
 
 class App:
     def __init__(self, root):
-        root.title("Calander")
+        root.title("Clock")
         width=350
         height=250
         screenwidth = root.winfo_screenwidth()
