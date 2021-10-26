@@ -54,7 +54,7 @@ class App:
         self.SaveQR["command"] = self.SaveQR_command
 
     def GenerateButton_command(self):
-        path = os.path.join("QR Code Generator", "result", "QRCode.png")
+        path = os.path.join("result", "QRCode.png")
         url = pyqrcode.create(self.LinkInput.get()).png(path, scale = 7)
         Image.open(path).show()
         
