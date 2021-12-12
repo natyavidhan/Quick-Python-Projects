@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 import random
+from tkinter import messagebox
 
 class App:
     def __init__(self, root):
@@ -12,9 +13,9 @@ class App:
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
-        
+
         AppLabel = tk.Label(root, text="Password Generator", font=tkFont.Font(family="Acme", size=18, weight="bold"), fg="#000000")
-        AppLabel.place(x=65, y=25, width=215, height=25)
+        AppLabel.place(x=50, y=25)
         self.capitalVar = tk.IntVar()
         self.capital = tk.Checkbutton(root, text="Capital Letters", font=tkFont.Font(family="Acme", size=12), fg="#000000", justify="left", variable=self.capitalVar)
         self.capital.place(x=20, y=80, width=150, height=25)
@@ -34,9 +35,9 @@ class App:
         self.lengthLabel.place(x=20, y=150, width=60, height=25)
         self.generate = tk.Button(root, text="Generate", font=tkFont.Font(family="Acme", size=12), fg="#000000", command=self.generatePassword)
         self.generate.place(x=100, y=180, width=200, height=25)
-        self.password = tk.Entry(root, font=tkFont.Font(family="Acme", size=12), fg="#000000")
+        self.password = tk.Entry(root, font=tkFont.Font(family="Acme", size=12))
         self.password.place(x=100, y=210, width=200, height=25)
-        
+
     def generatePassword(self):
         password = ""
         if self.capitalVar.get() == 1:
@@ -51,7 +52,7 @@ class App:
         try:
             password = "".join(random.sample(password, length))
         except:
-            password = "Error"
+            messagebox.showerror("Invalid","Select Checkbox")
         self.password.delete(0, tk.END)
         self.password.insert(0, password)
 
