@@ -1,7 +1,6 @@
 import tkinter as tk
 from datetime import datetime
 import pytz
-import json
 
 
 class App:
@@ -14,7 +13,7 @@ class App:
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
-        self.zones = json.load(open('zones.json'))
+        self.zones = pytz.all_timezones
         
         self.AppLabel = tk.Label(root, text="Clock", font=("Acme", 18))
         self.AppLabel.place(x=0, y=15, width=350, height=40)
