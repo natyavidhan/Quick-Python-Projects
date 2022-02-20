@@ -31,9 +31,8 @@ class App:
         self.date.place(x=0, y=190, width=350, height=20)
         
     def update(self):
-        self.clock.config(text=datetime.now(pytz.timezone(self.zone.get())).strftime("%I:%M:%S %p"))
         self.date.config(text=datetime.now(pytz.timezone(self.zone.get())).strftime("%A, %B %d, %Y"))
-        self.clock.after(1000, self.update)
+        self.clock.config(text=datetime.now(pytz.timezone(self.zone.get())).strftime("%I:%M:%S %p"))
         
 if __name__ == '__main__':
     root = tk.Tk()
