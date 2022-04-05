@@ -117,8 +117,8 @@ class App(tk.Frame):
     def PlayTime(self):
         self.currentTime = pygame.mixer.music.get_pos()/1000
         self.currentTime = time.strftime("%M:%S", time.gmtime(self.currentTime))
-        self.totalTime = time.strftime("%M:%S", time.gmtime(MP3(os.path.join("Music", self.currentSong)).info.length))        
-        self.Duration.config(text=str(self.currentTime) + " - " + str(self.totalTime))
+        self.totalTime = time.strftime("%M:%S", time.gmtime(MP3(os.path.join("Music", self.currentSong)).info.length))
+        self.Duration.config(text=f'{str(self.currentTime)} - {str(self.totalTime)}')
         self.Duration.after(1000, self.PlayTime)
         
     def VolumeChange(self, value):

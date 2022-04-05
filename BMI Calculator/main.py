@@ -33,8 +33,8 @@ class App:
             height = float(self.height_entry.get())
             weight = float(self.weight_entry.get())
             bmi = round(weight / (height / 100) ** 2)
-            self.bmi_value.config(text="BMI: " + str(bmi))
-            
+            self.bmi_value.config(text=f"BMI: {str(bmi)}")
+
             if(bmi<=16):
                 self.comment.config(text="you are severely underweight")
             elif(bmi<=18.5):
@@ -45,7 +45,7 @@ class App:
                 self.comment.config(text="you are overweight")
             else:
                 self.comment.config(text="you are severely overweight")
-            
+
         except:
             self.bmi_value.config(text="Invalid Input")
         

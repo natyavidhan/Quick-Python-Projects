@@ -13,15 +13,13 @@ class App:
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
-        
+
         self.API_KEY = ''
-        
+
         self.codes = []
         with open('codes.csv', 'r') as file:
             reader = csv.reader(file)
-            for row in reader:
-                self.codes.append(row[2])
-                
+            self.codes.extend(row[2] for row in reader)
         self.AppLabel = tk.Label(root, text="Currency Converter", font=("Acme", 18))
         self.AppLabel.place(x=80, y=20, width=195, height=30)
         self.fromCur = tk.StringVar()
@@ -51,7 +49,7 @@ class App:
         amount = self.amountEntry.get()
         fromCur = self.fromCur.get()
         toCur = self.toCur.get()
-        url = "https://v6.exchangerate-api.com/v6/"+ self.API_KEY +"/latest/" + fromCur
+        url = f"https://v6.exchangerate-api.com/v6/{self.API_KEY}/latest/{fromCur}"
         response = requests.get(url)
         data = response.json()
         self.resultEntry.config(text= str(float(amount) * data['conversion_rates'][toCur])+ " " + toCur)
