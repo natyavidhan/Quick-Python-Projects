@@ -17,7 +17,15 @@ class App:
         self.contact_frame = ctk.CTkFrame(self.root)
         self.contact_frame.place(x=215, y= 25, width=265, height=250)
 
-        ctk.CTkLabel(self.main_frame, text="ContactBook").place(x=0, y=10)
+        ctk.CTkLabel(self.main_frame, text="ContactBook", text_font=("Comic Sans MS", 23), justify="center").place(x=0, y=5)
+
+        self.contact_list = tk.Listbox(self.main_frame)
+        self.contact_list.place(x=10, y=50, width=180, height=150)
+
+        ctk.CTkButton(self.main_frame, text="Add", command=self.add_contact, text_font=("Comic Sans MS", 18)).place(x=10, y=205, width=180, height=35)
+
+    def add_contact(self):
+        pass
 
 
 if __name__ == "__main__":
