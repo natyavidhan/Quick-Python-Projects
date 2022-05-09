@@ -5,6 +5,7 @@ import json
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
+
 class App:
     def __init__(self, root):
         self.root = root
@@ -15,38 +16,92 @@ class App:
         self.current_contact = None
 
         self.main_frame = ctk.CTkFrame(self.root)
-        self.main_frame.place(x=10, y= 25, width=200, height=250)
+        self.main_frame.place(x=10, y=25, width=200, height=250)
 
         self.contact_frame = ctk.CTkFrame(self.root)
-        self.contact_frame.place(x=215, y= 25, width=265, height=250)
+        self.contact_frame.place(x=215, y=25, width=265, height=250)
 
-        ctk.CTkLabel(self.main_frame, text="ContactBook", text_font=("Comic Sans MS", 23), justify="center").place(x=0, y=5)
+        ctk.CTkLabel(
+            self.main_frame,
+            text="ContactBook",
+            text_font=("Comic Sans MS", 23),
+            justify="center",
+        ).place(x=0, y=5)
 
         self.contact_list = tk.Listbox(self.main_frame)
         self.contact_list.place(x=10, y=50, width=180, height=150)
         self.contact_list.bind("<<ListboxSelect>>", self.open_contact)
 
-        ctk.CTkButton(self.main_frame, text="Add", command=self.add_contact, text_font=("Comic Sans MS", 18)).place(x=10, y=205, width=180, height=35)
+        ctk.CTkButton(
+            self.main_frame,
+            text="Add",
+            command=self.add_contact,
+            text_font=("Comic Sans MS", 18),
+        ).place(x=10, y=205, width=180, height=35)
 
-        ctk.CTkLabel(self.contact_frame, text="Name", text_font=("Comic Sans MS", 15), justify="center").place(x=0, y=25, width=85, height=25)
-        ctk.CTkLabel(self.contact_frame, text="Phone", text_font=("Comic Sans MS", 15), justify="center").place(x=0, y=60, width=85, height=25)
-        ctk.CTkLabel(self.contact_frame, text="Email", text_font=("Comic Sans MS", 15), justify="center").place(x=0, y=95, width=85, height=25)
-        ctk.CTkLabel(self.contact_frame, text="Address", text_font=("Comic Sans MS", 12), justify="center").place(x=0, y=130, width=85, height=70)
+        ctk.CTkLabel(
+            self.contact_frame,
+            text="Name",
+            text_font=("Comic Sans MS", 15),
+            justify="center",
+        ).place(x=0, y=25, width=85, height=25)
+        ctk.CTkLabel(
+            self.contact_frame,
+            text="Phone",
+            text_font=("Comic Sans MS", 15),
+            justify="center",
+        ).place(x=0, y=60, width=85, height=25)
+        ctk.CTkLabel(
+            self.contact_frame,
+            text="Email",
+            text_font=("Comic Sans MS", 15),
+            justify="center",
+        ).place(x=0, y=95, width=85, height=25)
+        ctk.CTkLabel(
+            self.contact_frame,
+            text="Address",
+            text_font=("Comic Sans MS", 12),
+            justify="center",
+        ).place(x=0, y=130, width=85, height=70)
 
-        self.name_entry = ctk.CTkEntry(self.contact_frame, text_font=("Comic Sans MS", 12))
+        self.name_entry = ctk.CTkEntry(
+            self.contact_frame, text_font=("Comic Sans MS", 12)
+        )
         self.name_entry.place(x=85, y=25, width=165, height=25)
-        self.phone_entry = ctk.CTkEntry(self.contact_frame, text_font=("Comic Sans MS", 12))
+        self.phone_entry = ctk.CTkEntry(
+            self.contact_frame, text_font=("Comic Sans MS", 12)
+        )
         self.phone_entry.place(x=85, y=60, width=165, height=25)
-        self.email_entry = ctk.CTkEntry(self.contact_frame, text_font=("Comic Sans MS", 12))
+        self.email_entry = ctk.CTkEntry(
+            self.contact_frame, text_font=("Comic Sans MS", 12)
+        )
         self.email_entry.place(x=85, y=95, width=165, height=25)
-        self.address_entry = tk.Text(self.contact_frame, bg="gray24", relief="flat", borderwidth=0, font=("Comic Sans MS", 12), fg="white")
+        self.address_entry = tk.Text(
+            self.contact_frame,
+            bg="gray24",
+            relief="flat",
+            borderwidth=0,
+            font=("Comic Sans MS", 12),
+            fg="white",
+        )
         self.address_entry.place(x=85, y=130, width=165, height=70)
 
-        ctk.CTkButton(self.contact_frame, text="Save", command=self.save_contact, text_font=("Comic Sans MS", 13)).place(x=15, y=205, width=115, height=35)
-        ctk.CTkButton(self.contact_frame, text="Delete", command=self.delete_contact, text_font=("Comic Sans MS", 13), fg_color="#C11818", hover_color="#A80B0B").place(x=135, y=205, width=115, height=35)
+        ctk.CTkButton(
+            self.contact_frame,
+            text="Save",
+            command=self.save_contact,
+            text_font=("Comic Sans MS", 13),
+        ).place(x=15, y=205, width=115, height=35)
+        ctk.CTkButton(
+            self.contact_frame,
+            text="Delete",
+            command=self.delete_contact,
+            text_font=("Comic Sans MS", 13),
+            fg_color="#C11818",
+            hover_color="#A80B0B",
+        ).place(x=135, y=205, width=115, height=35)
 
         self.load_data()
-
 
     def add_contact(self):
         prompt = ctk.CTkToplevel(self.root)
@@ -54,10 +109,18 @@ class App:
         prompt.geometry("265x250")
         prompt.resizable(False, False)
 
-        ctk.CTkLabel(prompt, text="Name", text_font=("Comic Sans MS", 15), justify="center").place(x=0, y=25, width=85, height=25)
-        ctk.CTkLabel(prompt, text="Phone", text_font=("Comic Sans MS", 15), justify="center").place(x=0, y=60, width=85, height=25)
-        ctk.CTkLabel(prompt, text="Email", text_font=("Comic Sans MS", 15), justify="center").place(x=0, y=95, width=85, height=25)
-        ctk.CTkLabel(prompt, text="Address", text_font=("Comic Sans MS", 12), justify="center").place(x=0, y=130, width=85, height=70)
+        ctk.CTkLabel(
+            prompt, text="Name", text_font=("Comic Sans MS", 15), justify="center"
+        ).place(x=0, y=25, width=85, height=25)
+        ctk.CTkLabel(
+            prompt, text="Phone", text_font=("Comic Sans MS", 15), justify="center"
+        ).place(x=0, y=60, width=85, height=25)
+        ctk.CTkLabel(
+            prompt, text="Email", text_font=("Comic Sans MS", 15), justify="center"
+        ).place(x=0, y=95, width=85, height=25)
+        ctk.CTkLabel(
+            prompt, text="Address", text_font=("Comic Sans MS", 12), justify="center"
+        ).place(x=0, y=130, width=85, height=70)
 
         name_entry = ctk.CTkEntry(prompt, text_font=("Comic Sans MS", 12))
         name_entry.place(x=85, y=25, width=165, height=25)
@@ -65,7 +128,14 @@ class App:
         phone_entry.place(x=85, y=60, width=165, height=25)
         email_entry = ctk.CTkEntry(prompt, text_font=("Comic Sans MS", 12))
         email_entry.place(x=85, y=95, width=165, height=25)
-        address_entry = tk.Text(prompt, bg="gray24", relief="flat", borderwidth=0, font=("Comic Sans MS", 12), fg="white")
+        address_entry = tk.Text(
+            prompt,
+            bg="gray24",
+            relief="flat",
+            borderwidth=0,
+            font=("Comic Sans MS", 12),
+            fg="white",
+        )
         address_entry.place(x=85, y=130, width=165, height=70)
 
         def add_contact_logic():
@@ -73,14 +143,21 @@ class App:
             phone = phone_entry.get()
             email = email_entry.get()
             address = address_entry.get("1.0", tk.END)
-            self.data.append({"name": name, "phone": phone, "email": email, "address": address})
+            self.data.append(
+                {"name": name, "phone": phone, "email": email, "address": address}
+            )
             json.dump(self.data, open("data.json", "w"))
             self.load_data()
             self.contact_list.selection_set(-1)
             self.load_data()
             prompt.destroy()
 
-        ctk.CTkButton(prompt, text="Save", command=add_contact_logic, text_font=("Comic Sans MS", 13)).place(x=85, y=205, width=165, height=35)
+        ctk.CTkButton(
+            prompt,
+            text="Save",
+            command=add_contact_logic,
+            text_font=("Comic Sans MS", 13),
+        ).place(x=85, y=205, width=165, height=35)
 
     def save_contact(self):
         if type(self.current_contact) is tuple:
@@ -115,7 +192,7 @@ class App:
                     self.address_entry.delete("1.0", tk.END)
                     self.address_entry.insert("1.0", contact["address"])
                     break
-    
+
     def delete_contact(self):
         if type(self.current_contact) is tuple:
             self.data.pop(self.current_contact[0])
@@ -126,7 +203,6 @@ class App:
             self.phone_entry.delete(0, tk.END)
             self.email_entry.delete(0, tk.END)
             self.address_entry.delete("1.0", tk.END)
-
 
 
 if __name__ == "__main__":
