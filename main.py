@@ -43,7 +43,7 @@ class App:
         self.address_entry.place(x=85, y=130, width=165, height=70)
 
         ctk.CTkButton(self.contact_frame, text="Save", command=self.save_contact, text_font=("Comic Sans MS", 13)).place(x=15, y=205, width=115, height=35)
-        ctk.CTkButton(self.contact_frame, text="Delete", command=self.save_contact, text_font=("Comic Sans MS", 13), fg_color="#C11818", hover_color="#A80B0B").place(x=135, y=205, width=115, height=35)
+        ctk.CTkButton(self.contact_frame, text="Delete", command=self.delete_contact, text_font=("Comic Sans MS", 13), fg_color="#C11818", hover_color="#A80B0B").place(x=135, y=205, width=115, height=35)
 
         self.load_data()
 
@@ -82,10 +82,7 @@ class App:
 
         ctk.CTkButton(prompt, text="Save", command=add_contact_logic, text_font=("Comic Sans MS", 13)).place(x=85, y=205, width=165, height=35)
 
-
-
     def save_contact(self):
-        print(self.current_contact)
         if type(self.current_contact) is tuple:
             current_contact = self.data[self.current_contact[0]]
             current_contact["name"] = self.name_entry.get()
@@ -118,6 +115,18 @@ class App:
                     self.address_entry.delete("1.0", tk.END)
                     self.address_entry.insert("1.0", contact["address"])
                     break
+    
+    def delete_contact(self):
+        if type(self.current_contact) is tuple:
+            self.data.pop(self.current_contact[0])
+            json.dump(self.data, open("data.json", "w"))
+            self.load_data()
+            self.current_contact = None
+            self.name_entry.delete(0, tk.END)
+            self.phone_entry.delete(0, tk.END)
+            self.email_entry.delete(0, tk.END)
+            self.address_entry.delete("1.0", tk.END)
+
 
 
 if __name__ == "__main__":
